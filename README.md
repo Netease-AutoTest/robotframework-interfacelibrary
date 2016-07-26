@@ -1,40 +1,33 @@
 This Library for RobotFramework
-=====================================================
+----------------------------------------
+[![Documentation Status](https://readthedocs.org/projects/robotframework-interfacelibrary/badge/?version=latest)](http://robotframework-interfacelibrary.readthedocs.io/en/latest/?badge=latest)
 
-Introduction
----------------
+## Introduction
 
-RobotFramework-IFHttpLibrary is an Interface testing library for `RobotFramework`
+RobotFramework-InterfaceLibrary is an Interface library for `RobotFramework` 
 It includes post, get, delete, put method to send http requests,and also use MySql 
 datebase to verify the Correctness of response datas.
+ 
+It depends on [requests](https://github.com/kennethreitz/requests) library,and support Python 2.x and MySql database only.
 
-It support Python 2.x and MySql database only.
-
-Installation
-------------
-
-Using ``pip``
-'''''''''''''
-
-The recommended installation method is using
-`pip <http://pip-installer.org>`__::
-
+## Install
+### pip
+```
    pip install robotframework-interfacelibrary
+```
 
-The main benefit of using ``pip`` is that it automatically installs all
-dependencies needed by the library. Other nice features are easy upgrading
-and support for un-installation::
-
+The main benefit of using **pip** is that it installs all
+depended libraries automatically. Another nice feature is easy to upgrade or uninstall:
+```
     pip install --upgrade robotframework-interfacelibrary
     pip uninstall robotframework-interfacelibrary
-
-Usage Guider:
-----------------------------------------
+```
+## Usage Guide:
 Here is a sample test case.
 
 |                     |                         |                     |                       |                                    |                            |                |
 | --------------------| ------------------------| ------------------- | --------------------- | -----------------------------------|----------------------------|--------------- |
-| *** Settings ***    |                         |                     |                       |                                    |　　　　                    |                |
+|  **Settings**     |                         |                     |                       |                                    |　　　　                    |                |
 | Library             | String                  |                     |                       |                                    |                            |                |
 | Library             | Collections             |                     |                       |                                    |                            |                |
 | Library             | InterfaceLibrary        |                     |                       |                                    |                            |                |
@@ -49,19 +42,19 @@ Here is a sample test case.
 
  
 
-* Web端：通过Cookie登录访问。
-  设置环境变量keyword:
-  create session
-  connect to database
-  post/get request  登录接口
-* Mobile端:包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，
+- Web端：通过Cookie登录访问。<br>
+  设置环境变量keyword:<br>
+  create session<br>
+  connect to database<br>
+  post/get request  登录接口<br>
+- Mobile端:包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
   定制request headers,加密请求体body，再调用encrypt post 关键字发送加密http 请求。
  
-Project Contributors
+## Project Contributors
 --------------------
-* `Wuqi <wuqi@yixin.im>`_
-* `WeiYaTing <hzweiyating@corp.netease.com>`_
+[Wuqi](https://github.com/seven57)  <seven_five57@sina.com>   
+WeiYaTing <hzweiyating@corp.netease.com>
 
-.. _Robot Framework: http://robotframework.org
-.. _requests: http://docs.python-requests.org/en/master
-.. _mysql: https://github.com/sanpingz/mysql-connector
+Robot Framework: http://robotframework.org    
+requests: http://docs.python-requests.org/en/master     
+mysql: https://github.com/sanpingz/mysql-connector     
