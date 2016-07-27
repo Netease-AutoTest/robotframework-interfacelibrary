@@ -1,0 +1,2 @@
+*** Variables ***
+&{environment}    host=https://b.yixin.im    port=0

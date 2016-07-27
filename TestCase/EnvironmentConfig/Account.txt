@@ -1,0 +1,2 @@
+*** Variables ***
+&{account}        username=bizyx237@163.com    password=admin1234

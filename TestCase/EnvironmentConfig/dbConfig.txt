@@ -1,0 +1,2 @@
+*** Variables ***
+&{dbConfig}       dbname=numen    dbusername=test    dbpassword=123456    dbhost=xx.xx.xx.xx

@@ -1,0 +1,21 @@
+*** Settings ***
+Resource          ../Resources/Library.txt
+
+*** Keywords ***      Return         Method          Path                                         Parameter                                        Entity    Cookie
+增加网址                  [Arguments]    ${appName}      ${appUrl}                                    ${code}
+                      ${res}         post request    /customapp/addCompanyApp.p                   {'appName':'${appName}','appUrl':'${appUrl}'}    None
+                      check code     ${res}          ${code}
+
+查询自定义网址               ${res}         post request    /customapp/listApps.p                        None                                             None
+                      check code     ${res}          200
+                      ${resdic}      evaluate        ${res}
+                      ${len}         get length      ${resdic['data']['data']}
+                      ${id}          set variable    ${resdic['data']['data'][${len}-1]['id']}
+                      [Return]       ${len}          ${id}
+
+删除网址                  [Arguments]    ${ids}
+                      ${res}         Post request    /customapp/delCompanyApp.p                   {'ids':'${ids}'}                                 None
+                      check code     ${res}          200
+上传图片                  ${res}         post file request    /material/uploadMedia.do                     {'file':open('${图片本地URL}','rb')}                 {'type':'image'}    None
+                      [Return]       ${res}
+

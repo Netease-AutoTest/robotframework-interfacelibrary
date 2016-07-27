@@ -1,0 +1,32 @@
+*** Settings ***
+Suite Setup       设置环境
+Resource          ../CommonApi/WebCommonApi.txt
+Resource          ../Api/DomoTestApi.txt
+
+*** Variables ***
+${网址名称}           百度
+${正确网址URL}        https://www.baidu.com/
+${网址名称过长}         百度1111111111
+${本地图片URL}        Resources/Material/uploadpic.jpg
+
+*** Test Cases ***
+增加网址
+    增加网址    ${网址名称}    ${正确网址URL}    200
+    ${querycount}    ${id}    查询自定义网址
+    #数据库验证
+    ${applist}    mysql select    SELECT col_name,col_url FROM `elf_comapp_tab`WHERE id=${id}
+    ${name}    get from list    ${applist}    0
+    ${url}    get from list    ${applist}    1
+    should be equal    ${name}    ${网址名称}
+    should be equal    ${url}    ${正确网址URL}
+    #另一种验证
+    check if exists in database    SELECT * FROM elf_comapp_tab WHERE id=${id}
+    #输入名称太长异常
+    增加网址    ${网址名称过长}    ${正确网址URL}    400
+    [Teardown]    删除网址    ${id}
+
+上传图片
+    ${res}    上传图片      ${本地图片URL}
+    check code    ${res}    200
+
+ 

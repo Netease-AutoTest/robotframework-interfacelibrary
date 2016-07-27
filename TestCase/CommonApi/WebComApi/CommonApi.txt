@@ -1,0 +1,14 @@
+﻿*** Settings ***
+Resource          ../Resources/Library.txt
+Resource          ../EnvironmentConfig/Environment.txt
+Resource          ../EnvironmentConfig/Account.txt
+Resource          ../EnvironmentConfig/dbConfig.txt
+
+*** Keywords ***
+设置环境
+    create session    &{environment}[host]    &{environment}[port]    yixin   #yixin是session别名  
+    ${cookie}    get cookie    /checkUser.do
+    Set Global Variable    ${globalcookie}    ${cookie}
+    connect to database    &{dbConfig}[dbname]    &{dbConfig}[dbusername]    &{dbConfig}[dbpassword]    &{dbConfig}[dbhost]    
+    ${res}    post request    /checkUser.do    {'userName':'&{account}[username]','password':'&{account}[password]'}#path为登录接口，获取cookie
+    check code    ${res}    200

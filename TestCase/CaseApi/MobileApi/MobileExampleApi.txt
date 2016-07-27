@@ -1,0 +1,25 @@
+*** Settings ***
+Resource          ../../Resources/Library.txt
+Resource          ../../EnvironmentConfig/MobileConfig/Account.txt
+
+*** Keywords ***
+验证账号
+    ${res}    Mobile Post    {"c":"100"}    {"email":"&{exampleaccount}[test_email]","mac":"D4-3D-7E-C8-12-75"}
+    #判断请求是否成功
+
+激活账号
+    ${res}    Mobile Post    {"c":"101"}    {"email":"&{exampleaccount}[test_email]","name":"weiyating","password": "&{exampleaccount}[test_password]","mac":"D4-3D-7E-C8-12-75"}    ["password"]
+    #判断请求是否成功
+
+登陆
+    ${res}    Mobile Post    {"c":"102"}    {"email":"&{exampleaccount}[test_email]","password":"&{exampleaccount}[test_password]","mac":"D4-3D-7E-C8-12-75"}    ["password"]
+    #判断请求是否成功
+    ${resdic}    Evaluate    ${res}
+    ${key2}    Set Variable    ${resdic['result']['key2']}
+    ${uid}    Set Variable    ${resdic['result']['uid']}
+    [Return]    ${key2}    ${uid}
+
+获取用户信息
+    [Arguments]    ${key2}    ${uid}
+    ${res}    Mobile Post    {"c":"400"}    {"userId":"${uid}"}    None    ${key2}    ${uid}
+    #判断请求是否成功
