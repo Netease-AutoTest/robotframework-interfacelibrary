@@ -1,7 +1,7 @@
 Interface testing Keywords methods
 --------------------------
 
-.. autoclass:: HttpLibrary.HttpLibrary
+.. autoclass:: InterfaceLibrary.HttpLibrary.HttpLibrary
     :members:
-.. autoclass:: CheckResult.CheckResult
+.. autoclass:: InterfaceLibrary.CheckResult.CheckResult
     :members:
