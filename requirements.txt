@@ -1,3 +1,4 @@
 robotframework
 requests
 httplib2
+mysql-connector
