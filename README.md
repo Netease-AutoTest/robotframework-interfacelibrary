@@ -42,12 +42,14 @@ Here is a sample test case.
 
  
 
-- Web端：通过Cookie登录访问。<br>
+- Web端：
+  通过Cookie登录访问。<br>
   设置环境变量keyword:<br>
   create session<br>
   connect to database<br>
   post/get request  登录接口<br>
-- Mobile端:包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
+- Mobile端:
+  包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
   定制request headers,加密请求体body，再调用encrypt post 关键字发送加密http 请求。
  
 ## Project Contributors
