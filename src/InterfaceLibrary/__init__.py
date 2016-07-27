@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from HttpLibrary import HttpLibrary
 from CheckResult import CheckResult
 from version import VERSION
