@@ -1,8 +1,8 @@
 robotframework
 requests
 httplib2
-mysql-connector --install-option=" --egg "
+#mysql-connector --install-option=" --egg "
 #http://cdn.mysql.com/Downloads/Connector-Python/mysql-connector-python-2.0.4.zip#md5=3df394d89300db95163f17c843ef49df
-#-e git://github.com/mysql/mysql-connector-python.git@e7929787c0f3bfe9c99dbb21b3bf14650a615b1a#egg=mysql-connector-python-2.2.0
+-e git://github.com/mysql/mysql-connector-python.git@e7929787c0f3bfe9c99dbb21b3bf14650a615b1a#egg=mysql-connector-python-master
 
 # -e mysql-connector
