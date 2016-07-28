@@ -37,8 +37,8 @@ Usage Guider:
   create session
   connect to database
   post/get request  登录接口
-* Mobile端:包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，
-  定制request headers,加密请求体body，再调用encrypt post 关键字发送加密http 请求。
+* Mobile端:包括PC和Mobile客户端,通过Proxy访问需要加密，根据项目需求可扩展测试库然后增加相应的加密算法关键字，
+  定制相应的request headers和加密请求体body，再调用encrypt post 关键字发送加密http 请求。
  
 
 Project Contributors
