@@ -1,6 +1,7 @@
 This Library for RobotFramework
 ----------------------------------------
 [![Documentation Status](https://readthedocs.org/projects/robotframework-interfacelibrary/badge/?version=latest)](http://robotframework-interfacelibrary.readthedocs.io/en/latest/?badge=latest)
+[![Latest Version](https://img.shields.io/pypi/v/robotframework-requests.svg)](https://pypi.python.org/pypi/robotframework-interfacelibrary)
 
 ## Introduction
 
