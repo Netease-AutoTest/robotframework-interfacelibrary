@@ -27,19 +27,25 @@ Here is a sample test case.
 
 |                     |                         |                     |                       |                                    |                            |                |
 | --------------------| ------------------------| ------------------- | --------------------- | -----------------------------------|----------------------------|--------------- |
-|  **Settings**     |                         |                     |                       |                                    |　　　　                    |                |
-| Library             | String                  |                     |                       |                                    |                            |                |
-| Library             | Collections             |                     |                       |                                    |                            |                |
-| Library             | InterfaceLibrary        |                     |                       |                                    |                            |                |
-| Test Cases          |                         |                     |                       |                                    |　　　　                    |                |
-| Post Requests       |                         |                     |                       |                                    |　　　                      |                |
-|                     | Create Session          | &{enviro}[host]     | &{enviro}[port]       | alise                              |                            |                |
-|                     | Conncet To Datebase     | ${host}             | ${user}               | ${password}                        | ${database}                | ${port}        |
-|                     | ${res}                  | Post Request        | /activity/addActivity | {'activityName':'${activityName}'} | None                       |                |
-|                     | Check Code              | ${resp}             | 200                   |                                    |                            |                |
-|                     | ${res}                  |Post File Request    | /cgi-bin/file/upload  | {'file':open('logo.jpg','rb')}     | {'type':'jpg'}             |
-
-
+|  **Settings**     |                         |                             |                       |                                    |　　　　                    |                |
+| Library             | String                  |                           |                       |                                    |                            |                |
+| Library             | Collections             |                           |                       |                                    |                            |                |
+| Library             | InterfaceLibrary        |                           |                       |                                    |                            |                |
+| Test Cases          |                         |                           |                       |                                    |　　　　                    |                |
+| Post Requests       |                         |                           |                       |                                    |　　　                      |                |
+|                     | Create Session          | &{enviro}[host]           | &{enviro}[port]       | alise                              |                            |                |
+|                     | Conncet To Datebase     | ${host}                   | ${user}               | ${password}                        | ${database}                | ${port}        |
+|                     | ${res}                  | Post Request              | /activity/addActivity | {'activityName':'${activityName}'} | None                       |                |
+|                     | Check Code              | ${resp}                   | 200                   |                                    |                            |                |
+|                     | ${res}                  |Post File Request          | /cgi-bin/file/upload  | {'file':open('logo.jpg','rb')}  | {'type':'jpg'}             |
+|  Datebase requests  | ${list}                 | Mysql Select              | SELECT name, age FROM tab WHERE ID = ${id}             |
+   |                            |                |
+|                     | ${name}                 | Get From List             | 0 |
+|                     | ${age}                  | Get From List             | 1 |
+|                     | Should be equal         | ${activityName}           | ${name}|
+|                     | Delete Rows From Table  | id=${id} | comapp_tab |#condition and table name 
+|                     | Check If Not Exist In Datebase | SELECT * FROM comapp_tab WHERE id=${id} |
+|                     | Check if Exist In Datebase | SELECT name,company_id FROM staff_tab WHERE id=${id} |
  
 
 - Web端：
@@ -49,8 +55,8 @@ Here is a sample test case.
   connect to database<br>
   post/get request  登录接口<br>
 - Mobile端:
-  包括PC,Mobile,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
-  定制request headers,加密请求体body，再调用encrypt post 关键字发送加密http 请求。
+  包括PC,Mobile客户端,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
+  定制request headers,加密请求体body，再调用encrypt post关键字发送加密http 请求。
  
 ## Project Contributors
 --------------------
