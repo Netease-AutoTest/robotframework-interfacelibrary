@@ -1,0 +1,15 @@
+language: python
+python:
+- '2.7'
+script:
+- echo Mock Test
+deploy:
+  - provider: pypi
+    user: longma
+    password:
+      secure: i9LliivPeDCURJJTeNeJdNZLZmo8aCQuNEn9hw+hgU2WJhtDBucLEUt4+YNoVuKmvTbizgvke4w/zcy8P5py54fNvKG12blYeDqZ7JayKHEdx92O66TpC8ftXJ/gPcqdiKQmohd0sX4+lKB+w3TO5NDYItJoK2xDJIy5XpV07ScyNYzIKe2w9DlI7Z4wmMKodFIeBpytUsno6sAVGRthN4m8kJRDPx0vJe7EA9K9B5ZMZnXCvg4P7TmT8r3nD7Ue7CtREomXXASVPD7wkUT0btd6BOufYgZRzT39jwSmncDTSEt+NNMNCa84Yqy/wJ1ePDqsrdwMVdS4fX0TWOybAJZcxn2X8dIU/fJv4RVSRdHop6Mf3qovq04aPt4lmtH9UEfrxHZ4pEaDRWmwtTk7nu5hNsGLngSIEnl2R5hlDYw6VuDQmN3OdDe0baHYwarna2O53W4ymKZ0EdmhbBjXHf3Ys+L/Va68hbLYFrB8c1Z8wb/skI280IQibYBtSYjK6ZsyG0IC4+5/UItKgPaYDAtIKnq1vnArAd5J5dr1dftfH39mDyh+FnSxWYej/UahkPPnV7rffcfTKZTT8UJrGLfxs1goy+n6bze5j+zGxKI8Moe++eWBs54bV3cu5ncwF7L0x0MIJGGSJGhJgjWLlD7A2OkXp2Z3f4VSJBzqPoY=
+    distributions: sdist bdist_wheel
+    on:
+      tags: true
+after_deploy:
+- echo DONE
