@@ -2,7 +2,9 @@ language: python
 python:
 - '2.7'
 script:
-- echo Mock Test
+- echo pypi deployment
+install:
+- "pip install mysql-connector --egg pyenv"
 deploy:
   - provider: pypi
     user: longma
