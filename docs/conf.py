@@ -30,8 +30,8 @@ print sys.path
 sys.path.insert(0, __pkg__)
 print sys.path
 sys.path.insert(0, os.path.join(__pkg__,"./"))
+sys.path.insert(0, os.path.join(__pkg__,"./src"))
 print sys.path
-
 # install the depend module manually
 print os.popen("pip install http://cdn.mysql.com/Downloads/Connector-Python/mysql-connector-python-2.0.4.zip#md5=3df394d89300db95163f17c843ef49df").read()
 
