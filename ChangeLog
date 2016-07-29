@@ -1,0 +1,53 @@
+CHANGES
+=======
+
+* @hash -> @2.2.0
+* src -> IterfaceLibrary
+* append <;mysql-connector-python >= "2.0.4">
+* mysql-connector -> mysql-connector-python
+* rm comment
+* modify
+* double deps
+* mysql-connector >= 2.0.0  --install-option="--egg"
+* modify
+* update
+* --install-option=" --egg "
+* -e pkg
+* @commit hash version
+* + :
+* update reqiurements.txt Signed-off-by: seven57 <seven_five57@sina.com>
+* @2.2.0
+* fix requiremwnts.txt
+* update .travis.yml
+* triggle travis CI
+* coment mysql
+* triggle travis
+* fix passwd
+* correct password
+* add setup.cfg
+* update depend
+* using offical mysql-connector-python depend url
+* replace old setup.py by pbr toolchain
+
+1.0.0
+-----
+
+* Update README.md
+* Update .travis.yml
+* add travis ci pypi deployment
+* Update README.md
+* Update README.rst
+* Update README.md
+* update readme
+* Create README.md
+* Update usage.rst
+* Update usage.rst
+* Update usage.rst
+* +mysql-connector in requirements.txt
+* +requirements.txt
+* +coding: utf-8
+* update config.py to fix Non-ASCII character '\xe8' problem
+* Update usage.rst
+* add doc file
+* add gitignore file
+* add interface library
