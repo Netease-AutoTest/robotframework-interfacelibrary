@@ -61,8 +61,8 @@ Here is a sample test case.
  
 ## Project Contributors
 --------------------
-[Wuqi](https://github.com/seven57)  <seven_five57@sina.com>   
-WeiYaTing <hzweiyating@corp.netease.com>
+> [Wuqi](https://github.com/seven57) <seven_five57@sina.com>   
+> [Weiyating]
 
 Robot Framework: http://robotframework.org    
 requests: http://docs.python-requests.org/en/master     
