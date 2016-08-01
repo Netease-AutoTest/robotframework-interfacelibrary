@@ -1,8 +1,8 @@
 This Library for RobotFramework
 ----------------------------------------
+[![Latest Version](https://img.shields.io/pypi/v/robotframework-interfacelibrary.svg)](https://pypi.python.org/pypi/robotframework-interfacelibrary)
+[![Build Status](https://travis-ci.org/Netease-AutoTest/robotframework-interfacelibrary.svg?branch=master)](https://travis-ci.org/Netease-AutoTest/robotframework-interfacelibrary)
 [![Documentation Status](https://readthedocs.org/projects/robotframework-interfacelibrary/badge/?version=latest)](http://robotframework-interfacelibrary.readthedocs.io/en/latest/?badge=latest)
-[![Latest Version](https://img.shields.io/pypi/v/robotframework-requests.svg)](https://pypi.python.org/pypi/robotframework-interfacelibrary)
-
 ## Introduction
 
 RobotFramework-InterfaceLibrary is an Interface library for `RobotFramework` 
@@ -61,8 +61,8 @@ Here is a sample test case.
  
 ## Project Contributors
 --------------------
-[Wuqi](https://github.com/seven57)  <seven_five57@sina.com>   
-WeiYaTing <hzweiyating@corp.netease.com>
+[Wu Qi](https://github.com/seven57)   
+Wei Yating
 
 Robot Framework: http://robotframework.org    
 requests: http://docs.python-requests.org/en/master     
