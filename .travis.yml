@@ -13,7 +13,7 @@ deploy:
     user: longma
     password:
       secure: YtJ7Fi5OgPaLYO6MK2ciEZZ7szfw0vgLB+SQxwHPlDMr0sun5Wqjy7wA+2f+PdpcM+ym7Tzw32MlJk2ARTOWxQeSYDMcnCdT0dvYv1upTDs3IrzOZIwJbmz6zVrlWGqKtWX/mHjZ+gI9a1r4k2jvghrA3+Z4og7pnheCnUuvf2rOZEbtkN+hF9LEDeUoUH/nwCI8EuEpKT+kucCF7Qs8doy3PwoNRjaT5O+w0sQhdctM5MistVc966TBdziibNpcF+7dn0rU+uPTSQJ3RgTEIhdJ1qvfqLUeuDnM2qTPqHk7qTvbfdvJClz1vrXRCdb2vdebkF//FgsH7uTMpypzmMQxhozBMmQjzSu5dl2QlO3r9NS8CgpN0LWkFYMrloOc6v9QU0wbvlXIDfxdmqKLMwOyXf8behPO4qBiSZXdIRhpe0SacOSkZ+cPo02l//2lA+qbVYV68tMTwn5b5E8ZHwU7PBt3O8WU4T4uWQauk+UM7kNJfjf/4FMwt5Gqg2IpMsTREudccFKIZNJ8ZGQNuF4ZJSPQYSQ92cNmz7MfZxQcUmNodPhK4FY8MOYFlhPJELpNmtdMJRm+eZfZ741VY2/8uDsO9stbJFe8zfGoRN5ZIqCLnOvG5VwlrY+RFxSQSfrFkZF0yv1pEo71vRb6wYYw7U6FI6I3praFvkCsK98= 
-    distributions: sdist bdist_wheel
+    distributions: sdist
     on:
       tags: true
 after_deploy:
