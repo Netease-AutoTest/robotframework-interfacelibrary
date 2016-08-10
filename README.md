@@ -13,16 +13,17 @@ It depends on [requests](https://github.com/kennethreitz/requests) library,and s
 
 ## Install
 ### pip
-```
-   pip install robotframework-interfacelibrary
-```
 
 The main benefit of using **pip** is that it installs all
-depended libraries automatically. Another nice feature is easy to upgrade or uninstall:
-```
-    pip install --upgrade robotframework-interfacelibrary
-    pip uninstall robotframework-interfacelibrary
-```
+depended libraries automatically. Another nice feature is easy to manipulate:
+
+- ```pip install robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#install
+
+- ```pip install -U robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **stable** version
+- ```pip install -U robotframework-interfacelibrary --pre```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **lastest** release
+
+- ```pip uninstall robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#uninstall
+
 ## Usage Guide:
 Here is a sample test case.
 
@@ -67,4 +68,5 @@ Wei Yating
 Robot Framework: http://robotframework.org    
 requests: http://docs.python-requests.org/en/master     
 mysql: https://github.com/sanpingz/mysql-connector     
+
 
