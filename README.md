@@ -12,17 +12,25 @@ datebase to verify the Correctness of response datas.
 It depends on [requests](https://github.com/kennethreitz/requests) library,and support Python 2.x and MySql database only.
 
 ## Install
-### pip
+
+### Depend 
+The [**mysql-connector-python**](https://pypi.python.org/pypi/mysql-connector-python/2.0.4) module should be installed manually first:        
+```
+pip install http://cdn.mysql.com/Downloads/Connector-Python/mysql-connector-python-2.0.4.zip#md5=3df394d89300db95163f17c843ef49df
+```
+
+### PyPI
 
 The main benefit of using **pip** is that it installs all
-depended libraries automatically. Another nice feature is easy to manipulate:
+depended libraries automatically.    
+Another nice feature is easy to manipulate:
 
-- ```pip install robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#install
+```pip install robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#install
 
-- ```pip install -U robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **stable** version
-- ```pip install -U robotframework-interfacelibrary --pre```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **lastest** release
+```pip install -U robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **stable** version         
+```pip install -U robotframework-interfacelibrary --pre```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#upgrade to **lastest** release
 
-- ```pip uninstall robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#uninstall
+```pip uninstall robotframework-interfacelibrary```  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#uninstall
 
 ## Usage Guide:
 Here is a sample test case.
