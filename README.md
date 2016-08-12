@@ -56,12 +56,14 @@ Here is a sample test case.
 |                     | Check if Exist In Datebase | SELECT name,company_id FROM staff_tab WHERE id=${id} |
  
 
-- Web端：
-  通过Cookie登录访问。<br>
+- Web端:<br>
+  1.通过Cookie登录访问:<br>
   设置环境变量keyword:<br>
   create session<br>
   connect to database<br>
   post/get request  登录接口<br>
+  2.通过特殊的方式登录比如传入token key id等 可调用encrypt post 将字段放入headers中来实现登录
+
 - Mobile端:
   包括PC,Mobile客户端,通过Proxy访问需要加密，根据项目需求可扩展测试库增加相应的加密算法关键字，<br>
   定制request headers,加密请求体body，再调用encrypt post关键字发送加密http 请求。
