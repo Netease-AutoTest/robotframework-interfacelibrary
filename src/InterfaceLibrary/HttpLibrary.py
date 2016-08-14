@@ -43,45 +43,52 @@ class HttpLibrary(object):
         res = session.get(url)
         self._cache.register(session, alias=self.alias)
 
-    def post_request(self, uri, data=None, para=None):
+    def post_request(self, uri, form_data=None, para=None, json_data=None):
         """Issues a HTTP POST request.
 
         `uri`  请求路径
 
         `para` 追加在URL后面的参数，键值字典或Json格式，URL长度有限制，最多只能是1024字节.
 
-        `data` 在POST请求的HTTP消息主体中发送的数据，键值字典或Json格式
+        `form_data` 在POST请求的HTTP消息主体中发送的数据，键值字典。对应headers Content-Type:application/x-www-form-urlencoded
 
-        也可参考robotframework-requests库中post request关键字     
+        `json_data` 在POST请求的HTTP消息主体中发送的数据，json格式。 对应headers Content-Type:application/json
+
+        也可参考robotframework-requests库中Post Request关键字     
 
         Examples:
-        | ${res} |  Post Request | /checkUser.do | {'userName':'&{account}[username]','password':'&{account}[password]'} | None |#登录接口获取cookie
-        | ${res} | Post  Request | /manualreply/addClassify.p | {'name':'${name}'} | None |
+        | ${res} | Post Request | /checkUser.do | {'userName':'&{account}[username]','password':'&{account}[password]'} | None |#登录接口获取cookie
+        | ${res} | Post Request | /manualreply/addClassify | {'name':'${name}'} | None |None|
+        | ${res} | Post Request | /api/device/addDevice | None | None | {"deviceId":"${deviceId}","deviceName":"${deviceName}"} |
 
         """
+
         session = self._cache.switch(self.alias)
         url = self._get_url(uri)
         print "HttpRequest Url is " + url
-        if self.cookie == None:
-            response = session.post(url, data=eval(data))
-            if 'Set-Cookie' in response.headers.keys():
+        if self.cookie == None :
+            if str(form_data) != 'None':
+               response = session.post(url, data=eval(form_data))
+            elif str(json_data) != 'None':
+               response = session.post(url, json=json.dumps(eval(json_data)))
+            elif 'Set-Cookie' in response.headers.keys():
                 self.cookie = response.headers['Set-Cookie']
                 return self._replace_null(response.content).decode('utf-8')
-            else:
-                return self._replace_null(response.content).decode('utf-8')       
+            return self._replace_null(response.content).decode('utf-8')       
         else:
-            if str(para) == 'None' and str(data) == 'None':
+            if str(para) == 'None' and str(form_data) == 'None' and str(json_data) == 'None':
                response = session.post(url, cookies={'Cookie':self.cookie})
-            elif str(para) != 'None' and str(data) == 'None':
+            elif str(para) != 'None' and str(form_data) == 'None' and str(json_data) == 'None':
                response = session.post(url, params=eval(para), cookies={'Cookie':self.cookie})
-            elif str(para) == 'None'and str(data) != 'None':
-               response = session.post(url, data=eval(data), cookies={'Cookie':self.cookie}) 
-            else:
-               if type(eval(data)) == dict and type(eval(para)) == dict:
-                  response = session.post(url, params=eval(para), data=eval(data), cookies={'Cookie':self.cookie})
-               else:
-                  print "please confirm data type,data is not json or dict"
-            return self._replace_null(response.content).decode('utf-8')  
+            elif str(para) == 'None' and str(form_data) != 'None' and str(json_data) == 'None':
+               response = session.post(url, data=eval(data), cookies={'Cookie':self.cookie})
+            elif str(para) == 'None' and str(form_data) == 'None' and str(json_data) != 'None':
+                response = session.post(url, json=json.dumps(eval(json_data)), cookies={'Cookie':self.cookie})
+            elif str(para) != 'None' and str(form_data) != 'None' and str(json_data) != 'None':
+                response = session.post(url, params=eval(para), data=eval(data), cookies={'Cookie':self.cookie})
+            elif str(para) != 'None' and str(form_data) == 'None' and str(json_data) != 'None':
+                response = session.post(url, params=eval(para), json=json.dumps(eval(json_data)), cookies={'Cookie':self.cookie}) 
+            return self._replace_null(response.content).decode('utf-8') 
    
     
     def post_file_request(self, uri, file, data=None, para=None):
@@ -110,7 +117,7 @@ class HttpLibrary(object):
         return self._replace_null(response.content).decode('utf-8')
 
 
-    def get_request(self, uri, para=None):
+    def get_request(self, uri, para=None, headers=None):
         """Issues a HTTP Get Request.
 
         `para` 追加在URL后面的参数，键值字典或Json格式，URL长度有限制，最多只能是1024字节.
@@ -133,7 +140,7 @@ class HttpLibrary(object):
             url = self._get_url(uri)
         print "HttpRequest Url is " + url
         if self.cookie == None:
-            response = session.get(url, params=eval(para))
+            response = session.get(url, params=eval(para),headers=eval(headers))
             if 'Set-Cookie' in response.headers.keys():
                self.cookie = response.headers['Set-Cookie']
                return self._replace_null(response.content).decode('utf-8')
@@ -147,27 +154,32 @@ class HttpLibrary(object):
                response = session.get(url, params=eval(para), cookie={'Cookie':self.cookie})
             return self._replace_null(response.content).decode('utf-8')
 
-    def encrypt_post(self,para,body,headers):
-        """Issues a encrpyt Http Post Request
+    def encrypt_post(self,uri,para,body,headers):
+        """Issues a encrpyt or specific headers Http Post Request
 
         `para` 键值字典或json格式
 
         `body` 加密后的请求体。加密前键值字典格式，加密后可能是字符串格式
+               对于不需要的body，则为字典或json格式
 
         `headers` 根据相应的请求加密算法定制请求头 键值字典格式，例如可包含时间戳，请求唯一标示符，对请求体的签名，用户Id等
-        返回的response 内容也是加密后的，需要相对应的解密算法来解密。
+                  返回的response 内容也是加密后的，需要相对应的解密算法来解密。
+                  对于某些特殊的登录方式，可能需要在headers中加入与登录有关的字段，如id,key,token等，具体根据开发项目需求来.
 
         Examples:
         | ${enres} | encrpyt post | {"c":"100"} | ${enbody} | {'Content-Type':'text/plain','time':'${strtime}','unique':'${unique}','sign':'${sign}','uid':'','ua':'IOS/1.0'} |
 
         """
         if para == 'None':
-            url = self._checkport()
+            url = self._get_url(uri)
         else:
             url = self._checkport() + '?' + str(self._encodepara(para))
         print 'HttpPost url is ' + url
         http = httplib2.Http(".cache", disable_ssl_certificate_validation=True)
-        resp,content = http.request(url,'POST', headers=eval(headers), body=body)
+        if type(body) == str:
+            resp,content = http.request(url,'POST', headers=eval(headers), body=body)
+        else:
+            resp,content = http.request(url,'POST', headers=eval(headers), body=json.dumps(eval(body)))
         return content    
 
 
