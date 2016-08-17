@@ -54,33 +54,40 @@ class CheckResult():
             self._execute_sql(cursor,sql)
         except mysql.connector.Error as err:
             print err
-        rows = cursor.fetchall()
-         
-        """判断查询内容"""
-        endn = sql.find('FROM')
-        cutstr = sql[7:endn - 1]
-        spstr = cutstr.split(',')
 
-        """判断是否是全部查询，返回记录总数"""
-        if spstr[0] == '*':
-            return len(rows)
-
-        """判断是否有数据返回"""
-        if len(rows) == 0:
-            print 'no data return'
-            return
-        if len(spstr) == 1:
-            print 'the value of ' + str(spstr[0]) + ' is ' + str(rows[0][spstr[0]])
-            #return str(rows[0][spstr[0]])
-            return rows[0][spstr[0]]
         else:
-            listdata = []
-            for element in spstr:
-                print 'value of ' + element + ' is ' + str(rows[0][element])
-                listdata.append(rows[0][element])
-            return listdata
-        #cursor.close()
-        #self.cnx.close()
+            rows = cursor.fetchall()
+             
+            """判断查询内容"""
+            endn = sql.find('FROM')
+            cutstr = sql[7:endn - 1]
+            spstr = cutstr.split(',')
+
+            """判断是否是全部查询，返回记录总数"""
+            if spstr[0] == '*':
+                return len(rows)
+
+            """判断是否有数据返回"""
+            if len(rows) == 0:
+                print 'no data return'
+                return
+            if len(spstr) == 1:
+                print 'the value of ' + str(spstr[0]) + ' is ' + str(rows[0][spstr[0]])
+                #return str(rows[0][spstr[0]])
+                return rows[0][spstr[0]]
+            else:
+                listdata = []
+                for element in spstr:
+                    print 'value of ' + element + ' is ' + str(rows[0][element])
+                    listdata.append(rows[0][element])
+                return listdata
+        finally:
+            #cursor.close()
+            #self.cnx.close()
+            #avoid cache
+            if cursor:
+                self.cnx.rollback()
+
 
     def execute_mysql_script(self, sqlScriptFileName):
         """Executes the sql sript file of the `sqlScriptFileName` as SQL commands.
