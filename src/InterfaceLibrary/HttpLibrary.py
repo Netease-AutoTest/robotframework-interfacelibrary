@@ -91,7 +91,7 @@ class HttpLibrary(object):
             return self._replace_null(response.content).decode('utf-8') 
    
     
-    def post_file_request(self, uri, file, data=None, para=None):
+    def post_file_request(self, uri, file, data=None, para=None,headers=None):
         """Issues a HTTP Post Request to  upload file.
 
         `file` file must be dictionary of {filename: fileobject} files to multipart upload. 
@@ -100,21 +100,34 @@ class HttpLibrary(object):
 
         `data` the body to attach to the request must be a python dictionary.
 
+        `headers` 若不通过cookie登录，则可以在headers中填写与登录有关的字段（根据项目需求来）
+
         文件类型字段以参数或请求体参数传入
 
         Examples:
         | ${res} |  Post File Request | /cgi-bin/file/upload | {'content':open('Resources/Material/logo.jpg','rb')} | {'type':'jpg'} | {'access_token':'${access_token}'} | 
       
         """
+
         session = self._cache.switch(self.alias)
         url = self._get_url(uri)
         print "HttpRequest Url is " + url
-
-        if para == None:
-           response = session.post(url, files=eval(file), data=eval(data), cookies={'Cookie':self.cookie})
+        if self.cookie == None:
+            if data =='None' and para =='None':
+                response = session.post(url, files=eval(file), headers=eval(headers))
+            elif data != 'None' and para == 'None':
+                response = session.post(url, files=eval(file), data=eval(data), headers=eval(headers))
+            elif data != 'None' and para != 'None':
+                response = session.post(url, files=eval(file), data=eval(data),params=eval(para), headers=eval(headers))
+            return self._replace_null(response.content).decode('utf-8')
         else:
-            response = session.post(url, files=eval(file), params=eval(para), data=eval(data), cookies={'Cookie':self.cookie})
-        return self._replace_null(response.content).decode('utf-8')
+            if para == 'None' and data == None:
+                response = session.post(url, files=eval(file), cookies={'Cookie':self.cookie})
+            elif para == 'None' and data != None:
+                response = session.post(url, files=eval(file), data=eval(data), cookies={'Cookie':self.cookie})
+            elif para != 'None' and data !=None:
+                response = session.post(url, files=eval(file), params=eval(para), data=eval(data), cookies={'Cookie':self.cookie})
+            return self._replace_null(response.content).decode('utf-8')
 
 
     def get_request(self, uri, para=None, headers=None):
@@ -159,8 +172,8 @@ class HttpLibrary(object):
 
         `para` 键值字典或json格式
 
-        `body` 加密后的请求体。加密前键值字典格式，加密后可能是字符串格式
-               对于不需要的body，则为字典或json格式
+        `body` 若需要加密，加密前键值字典或json格式格式，加密后是字符串格式
+               对于不需要加密的body，则为字典或json格式，json格式需在headers里指定Content-Type类型
 
         `headers` 根据相应的请求加密算法定制请求头 键值字典格式，例如可包含时间戳，请求唯一标示符，对请求体的签名，用户Id等
                   返回的response 内容也是加密后的，需要相对应的解密算法来解密。
@@ -168,7 +181,7 @@ class HttpLibrary(object):
 
         Examples:
         | ${enres} | encrpyt post | {"c":"100"} | ${enbody} | {'Content-Type':'text/plain','time':'${strtime}','unique':'${unique}','sign':'${sign}','uid':'','ua':'IOS/1.0'} |
-
+        | ${res} | encrpyt post | /api/device/addDevice | None | {"deviceId":"${deviceId}"} | {'Content-Type':'application/json','token':'${token}'}|
         """
         if para == 'None':
             url = self._get_url(uri)
