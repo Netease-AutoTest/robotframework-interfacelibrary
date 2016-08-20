@@ -72,9 +72,14 @@ class CheckResult():
                 print 'no data return'
                 return
             if len(spstr) == 1:
-                print 'the value of ' + str(spstr[0]) + ' is ' + str(rows[0][spstr[0]])
-                #return str(rows[0][spstr[0]])
-                return rows[0][spstr[0]]
+                if len(rows) > 1:
+                    lists = []
+                    for element in rows:
+                        lists.append(rows[0][spstr[0]])
+                    return lists
+                else:
+                    print 'the value of ' + str(spstr[0]) + ' is ' + str(rows[0][spstr[0]])
+                    return rows[0][spstr[0]]
             else:
                 listdata = []
                 for element in spstr:
