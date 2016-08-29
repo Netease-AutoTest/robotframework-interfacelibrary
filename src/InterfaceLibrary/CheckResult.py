@@ -74,8 +74,8 @@ class CheckResult():
             if len(spstr) == 1:
                 if len(rows) > 1:
                     lists = []
-                    for element in rows:
-                        lists.append(rows[0][spstr[0]])
+                    for i in range(0,len(rows)):
+                        lists.append(rows[i][spstr[0]])
                     return lists
                 else:
                     print 'the value of ' + str(spstr[0]) + ' is ' + str(rows[0][spstr[0]])
