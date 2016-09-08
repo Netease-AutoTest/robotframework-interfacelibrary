@@ -45,6 +45,8 @@ class HttpLibrary(object):
 
     def post_request(self, uri, form_data=None, para=None, json_data=None):
         """Issues a HTTP POST request.
+        此关键字只适用于普通post请求和用cookie 登录的post请求，
+        若需要利用headers里的特殊字段来登录，目前先用encrypt post 关键字，后面再修复
 
         `uri`  请求路径
 
@@ -106,7 +108,8 @@ class HttpLibrary(object):
 
         Examples:
         | ${res} |  Post File Request | /cgi-bin/file/upload | {'content':open('Resources/Material/logo.jpg','rb')} | {'type':'jpg'} | {'access_token':'${access_token}'} | 
-      
+        
+        | ${res} |  Post File Request | /api/file/upload | {'MultiPart File':open('${file}','rb')} | None | None | {'Content-Type':'application/json','token':'${token}','key': '${key}' |
         """
 
         session = self._cache.switch(self.alias)
@@ -121,11 +124,11 @@ class HttpLibrary(object):
                 response = session.post(url, files=eval(file), data=eval(data),params=eval(para), headers=eval(headers))
             return self._replace_null(response.content).decode('utf-8')
         else:
-            if para == 'None' and data == None:
+            if para == 'None' and data == 'None':
                 response = session.post(url, files=eval(file), cookies={'Cookie':self.cookie})
-            elif para == 'None' and data != None:
+            elif para == 'None' and data != 'None':
                 response = session.post(url, files=eval(file), data=eval(data), cookies={'Cookie':self.cookie})
-            elif para != 'None' and data !=None:
+            elif para != 'None' and data != 'None':
                 response = session.post(url, files=eval(file), params=eval(para), data=eval(data), cookies={'Cookie':self.cookie})
             return self._replace_null(response.content).decode('utf-8')
 
@@ -137,6 +140,9 @@ class HttpLibrary(object):
 
         `uri` 可以是请求路径，也可以是带host的url
 
+        `headers` 若不通过cookie登录，则可以在headers中填写与登录有关的字段（根据项目需求来）
+
+
         Examples: 
         | ${res} | Get Request | /cgi-bin/jssdk/ticket / {'access_token':'${acces_token}'}
         
@@ -144,6 +150,7 @@ class HttpLibrary(object):
         | ${resdic} | Evaluate | ${res} |
         | Set Suite Variable | ${url} | ${resdic['result']['url']} |
         | ${res} | get request | ${url} | {'uid':'${uidencode}','timestamp':'${strtime}','signature':'${sign}','unique':'${unique}'} |
+        | ${res} | Get Request | /api/poctrecord/getGuide | None | {'Content-Type':'application/json','token':'${token}','key': '${key}' |
 
         """
         session = self._cache.switch(self.alias)
@@ -152,14 +159,19 @@ class HttpLibrary(object):
         else:
             url = self._get_url(uri)
         print "HttpRequest Url is " + url
-        if self.cookie == None:
-            response = session.get(url, params=eval(para),headers=eval(headers))
+        if self.cookie == None and headers == 'None' :
+            response = session.get(url, params=eval(para))
             if 'Set-Cookie' in response.headers.keys():
                self.cookie = response.headers['Set-Cookie']
                return self._replace_null(response.content).decode('utf-8')
             else:
-                return self._replace_null(response.content).decode('utf-8')
-        
+               return self._replace_null(response.content).decode('utf-8')
+        elif self.cookie == None and headers != 'None':
+            if para != 'None':   
+               response = session.get(url, params=eval(para),headers=eval(headers))
+            else:
+                response = session.get(url, headers=eval(headers))
+            return self._replace_null(response.content).decode('utf-8')
         else:
             if para == 'None':
                response = session.get(url, cookies={'Cookie':self.cookie})
