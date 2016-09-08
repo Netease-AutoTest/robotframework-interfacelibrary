@@ -201,19 +201,29 @@ class CheckResult():
         return cursor.execute(sql)
         
 
-    def generate_date(self,days=0):
+    def generate_date(self,days=0,timeflag=0):
         """
-        generate date based on current date
+        generate date based on current date,if you want to get the date with time, 
+        you can set the parameter `timeflag` as `1`
         Example usage:
         | Generate Date | 5 |
-        # Generate the date after 5 days from today
+        # Only generate the date after 5 days from today  eg:2016-09-13
         | Generate Date | -5 |
-        # Generate the date before 5 days from today
+        # Only generate the date before 5 days from today eg:2016-09-04
+        | Generate Date | 5 | 1 |
+        Generate the date with time before 5 days from today eg:2016-09-08 10:30:20 
+        | Generate Date | 0 | 1 |
+        Generate the current date with time
+        | Generate Date |
+        Generate the current date.
 
         """
         days = int(days)
         timer = datetime.datetime.now() + datetime.timedelta(days)
-        return timer.strftime('%Y-%m-%d %H:%M:%S')
+        if int(timeflag) == 1:
+            return timer.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            return timer.strftime('%Y-%m-%d')
 
     def generate_random_int(self, n2, n1=1):
         """ generate random int between n1 and n2
